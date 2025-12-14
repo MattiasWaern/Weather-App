@@ -1,3 +1,13 @@
+const weatherGradients = {
+  "Overcast": "linear-gradient(180deg, #6e7f80 0%, #9fb3b8 50%, #dbe7e4 100%)",
+  "Partly cloudy": "linear-gradient(180deg, #8ec5fc 0%, #cfd9df 50%, #fdfbfb 100%)",
+  "Clear": "linear-gradient(180deg, #4facfe 0%, #00c6fb 60%, #e0f7ff 100%)",
+  "Sunny": "linear-gradient(180deg, #fddb92 0%, #f6d365 50%, #fda085 100%)",
+  "Rain": "linear-gradient(180deg, #4b6cb7 0%, #182848 100%)",
+  "Light rain": "linear-gradient(180deg, #6a85b6 0%, #bac8e0 100%)",
+  "Snow": "linear-gradient(180deg, #e6dada 0%, #274046 100%)"
+};
+
 
 async function getWeatherInformation(city) {
     const apiKey = 'da68076da8284c1c8c6231402251112';
@@ -12,6 +22,7 @@ async function getWeatherInformation(city) {
         }
 
         const data = await response.json();
+        console.log(data.current.condition.text);
         return data;
 
     } catch (error) {
@@ -21,7 +32,7 @@ async function getWeatherInformation(city) {
 
 async function searchCity(){
     const city = document.getElementById("cityInput").value;
-
+    
      if (!city) {
         alert("Skriv in en stad först!");
         return;
@@ -31,6 +42,7 @@ async function searchCity(){
 
     if(!data) return;
    
+const condition = data.current.condition.text;
 
 document.getElementById("cityInformation").innerHTML = `
     <h2>${data.location.name}, ${data.location.country}</h2>
@@ -40,4 +52,10 @@ document.getElementById("cityInformation").innerHTML = `
     <p>${data.location.localtime}</p>
 `;
 
+document.body.style.background =
+  weatherGradients[condition] ||
+  "linear-gradient(180deg, #bdc3c7 0%, #2c3e50 100%)";
+
 }
+
+
