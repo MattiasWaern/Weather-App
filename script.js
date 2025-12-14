@@ -17,9 +17,6 @@ async function getWeatherInformation(city) {
     } catch (error) {
         console.error("Error fetching weather data:", error);
     }
-
- 
-
 }
 
 async function searchCity(){
