@@ -154,22 +154,54 @@ forecastContainer.innerHTML = "";
 
 forecastData.forecast.forecastday.forEach(day => {
     forecastContainer.innerHTML += `
-            <div class="forecast-day">
-                <p>Date: ${day.date}</p>
-                <img src="https:${day.day.condition.icon}" alt="forecast-icon">
-                <p>${day.day.maxtemp_c}° / ${day.day.mintemp_c}°</p>
-                <p>💧 ${day.day.avghumidity}%</p>
-                <p>🌧️ ${day.day.totalprecip_mm} mm</p>
-                <p>💨 ${day.day.maxwind_kph} kph</p>
+        <div class="forecast-day">
+            <p>${formatDate(day.date)}</p>
+            <img src="https:${day.day.condition.icon}" alt="forecast-icon">
+
+            <p class="forecast-temp">${Math.round(day.day.maxtemp_c)} ° / ${Math.round(day.day.mintemp_c)} °</p>
+            <p>${day.day.condition.text}</p>
+            <div class="forecast-details">
+                <span> <i class="fas fa-tint"></i> ${day.day.avghumidity}%</span>
+
+                <span> <i class="fas fa-cloud-rain"></i> ${day.day.totalprecip_mm}mm</span>
+
+                <span> <i class="fas fa-wind"></i> ${day.day.maxwind_kph}km/h</span>
             </div>
-        `;
+        </div>
+    `;
 });
 
 
 document.body.style.background =
-  weatherGradients[condition] ||
-  "linear-gradient(180deg, #bdc3c7 0%, #2c3e50 100%)";
+    weatherGradients[condition] ||
+    weatherGradients["Cloudy"];
 
+} catch (error){
+    console.error("Error", error);
+    showError("Ett fel uppstod. Försök igen senare.");
+} finally {
+    document.getElementById('loading').style.display = 'none';
 }
+
+function showError(message){
+    const errorDiv = document.getElementById('errorMessage');
+    errorDiv.textContent = message;
+    errorDiv.style.display = 'block';
+    document.getElementById('loading').style.display = 'none';
+}
+
+document.getElementById('searchButton').addEventListener('click', searchCity);
+
+document.getElementById('cityInput').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        searchCity();
+    }
+});
+
+window.addEventListener('load', function() {
+    this.document.getElementById('cityInput').value = 'Stockholm';
+    searchCity();
+});
+
 
 
