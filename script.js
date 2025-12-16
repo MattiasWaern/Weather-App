@@ -52,6 +52,29 @@ async function getWeatherForecast(city){
     }
 }
 
+function formatDate(dateString){
+    const date = new Date(dateString);
+    const options = { weekday: 'long', day: 'numeric', month: 'short'};
+    return date.toLocaleDateString('sv-SE', options);
+}
+
+function getWeatherIcon(condition){
+    const icons = {
+        "Sunny": "fas fa-sun",
+        "Clear": "fas fa-sun",
+        "Partly cloudy": "fas fa-cloud-sun",
+        "Cloudy": "fas fa-cloud",
+        "Overcast": "fas fa-cloud",
+        "Rain": "fas fa-cloud-rain",
+        "Light rain": "fas fa-cloud-rain",
+        "Snow": "fas fa-snowflake",
+        "Light snow": "fas fa-snowflake"
+    };
+    return icons[condition] || "fas fa-cloud";
+}
+
+
+
 async function searchCity(){
     const city = document.getElementById("cityInput").value;
     
