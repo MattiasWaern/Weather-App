@@ -8,6 +8,7 @@ const weatherGradients = {
   "Sunny": "linear-gradient(180deg, #fddb92 0%, #f6d365 50%, #fda085 100%)",
   "Rain": "linear-gradient(180deg, #4b6cb7 0%, #182848 100%)",
   "Light rain": "linear-gradient(180deg, #6a85b6 0%, #bac8e0 100%)",
+  "Patchy rain nearby": "linear-gradient(180deg, #6a85b6 0%, #bac8e0 100%)",
   "Snow": "linear-gradient(180deg, #e6dada 0%, #274046 100%)"
 };
 
