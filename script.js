@@ -103,26 +103,51 @@ async function searchCity(){
 
 
 
-// --------------------- Current Weather
+// --------------------- Current Weather ---------------------
 
 document.getElementById("cityInformation").innerHTML = `
-    <h2>${currentData.location.name}, ${currentData.location.country}</h2>
-    <h3>${currentData.location.region}</h3>
-    <img src="https:${currentData.current.condition.icon}" alt="weather-Icon">
-    <p>${currentData.current.temp_c}°C</p>
-    <p>${currentData.current.condition.text}</p>
-   
+    <div class="current-weather">
+        <div class="location-info">
+            <h2>${currentData.location.name}, ${currentData.location.country}</h2>
+            <h3>${currentData.location.region}</h3>
+            <div class="temp-display">
+                <img src="https:${currentData.current.condition.icon}" alt="weather-Icon">
+                <p>${Math.round(currentData.current.temp_c)}°C</p>
+            </div>
+            <p class="condition">${currentData.current.condition.text}</p>
+        </div>
+
+        <div class="weather-details">
+            <div class="detail-item">
+                <i class="fas fa-eye"></i>
+                <p>Sikt</p>
+                <p class="detail-value">${currentData.current.vis_km} km</p>
+            </div>
+            <div class="detail-item">
+                <i class="fas fa-tint"></i>
+                <p>Fuktighet</p>
+                <p class=detail-value">${currentData.current.humidity}%</p>
+            </div>
+            <div class="detail-item">
+                <i class="fas fa-wind"></i>
+                <p>Vind</p>
+                <p class=detail-value">${currentData.current.wind_kph}km/h</p>
+            </div>
+            <div class="detail-item">
+                <i class="fas fa-clound-rain"></i>
+                <p>Nederbörd</p>
+                <p class=detail-value">${currentData.current.precip_mm} mm</p>
+            </div>
+        </div>
+    </div>
+    <div class="time-info">
+        <p>Senast uppdaterad: ${currentData.location.localtime}</p>
+    </div>
 `;
 
-document.getElementById("weatherInformation").innerHTML = `
-    <p>${currentData.current.vis_km} km</p>
-    <p>💧${currentData.current.humidity}%</p>
-    <p>💨${currentData.current.wind_kph} kph</p>
-    <p>${currentData.current.precip_mm} mm</p>
-    <p>${currentData.location.localtime}</p>
-`;
 
-// --------------------- Weather forecast
+
+// --------------------- Weather forecast -----------------------
 
 const forecastContainer = document.getElementById("weatherForecast");
 forecastContainer.innerHTML = "";
