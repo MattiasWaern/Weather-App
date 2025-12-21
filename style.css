@@ -209,7 +209,7 @@ body {
   padding: 15px;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 15px;
-  transition: transform 0.3 ease, background 0.3s ease;
+  transition: transform 0.3s ease, background 0.3s ease;
 }
 
 .detail-item:hover {
